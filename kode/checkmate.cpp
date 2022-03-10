@@ -17,7 +17,7 @@ private:
 public:
     void player();
     void updatePlayer();
-    int  playerWin();
+    int  playerWin() {wins = 0;};
 };
 
 // vectorer:
@@ -47,7 +47,7 @@ char kommando;
 //    readFromFile();
 
     skrivMeny();
-    kommando = lesChar("\nKommando");
+    kommando = lesChar("\nKommando");           
 
     while(kommando != 'Q') {
         switch(kommando) {
@@ -71,11 +71,34 @@ char kommando;
 */
 void Player::player() {
 
-    cout << "\n\tFull name: "; getline(cin, name);
+    Player* player;
 
-}
- 
+    player = new Player;
+
+    cout << "\n\tFull name: "; getline(cin, player->name);
+
+    player->rating = lesInt("\n\tRating: ", 1, 10);
+
+    player->playerID = lesInt("\n\tPlayer ID: ", 1, 1000);
+
+    cout << "\n\tClub: "; getline(cin, player->club);
+
+    gPlayers.push_back(player);
+
+    cout << "\n\nPlayer added!\n\n";
+} 
+
+/**
+ * Updates the info of an excisting player
+ * 
+ * @see viewPlayers()
+ */
 void Player::updatePlayer() {
+
+    viewPlayers();
+
+
+
 
 }
 
@@ -92,6 +115,10 @@ void newTournament() {
 }
 
 void viewPlayers() {
+
+    for(int i = 0; i < gPlayers.size(); i++) {
+        cout << gPlayers[i] << "\n\n";
+    }
 
 }
  
